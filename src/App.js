@@ -1,28 +1,74 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container, Row, Col, Form } from "react-bootstrap";
-import Navigation from "./components/Navigation";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Blogs from "./pages/Blogs";
-import Contact from "./pages/Contact";
-import NoPage from "./pages/NoPage";
-import Login from "./pages/Login";
+// Import React
+import React from "react";
 
-function App() {
+// Import Bootstrap
+import { Nav, Navbar, Container, Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+
+// Import Custom CSS
+import "./App.css";
+
+// Import from react-router-dom
+import {
+	BrowserRouter as Router,
+	Routes as Switch,
+	Route,
+	Link,
+} from "react-router-dom";
+
+// Import other React Component
+import CreateStudent from "./Components/create-student.component";
+import EditStudent from "./Components/edit-student.component";
+import StudentList from "./Components/student-list.component";
+
+// App Component
+const App = () => {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path="blogs" element={<Blogs />} />
-					<Route path="contact" element={<Contact />} />
-					<Route path="login" element={<Login />} />
-					<Route path="*" element={<NoPage />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<Router>
+			<div className="App">
+				<header className="App-header">
+					<Navbar bg="dark" variant="dark">
+						<Container>
+							<Navbar.Brand>
+								<Link to={"/create-student"} className="nav-link">
+									React MERN Stack App
+								</Link>
+							</Navbar.Brand>
+
+							<Nav className="justify-content-end">
+								<Nav>
+									<Link to={"/create-student"} className="nav-link">
+										Create Student
+									</Link>
+								</Nav>
+
+								<Nav>
+									<Link to={"/student-list"} className="nav-link">
+										Student List
+									</Link>
+								</Nav>
+							</Nav>
+						</Container>
+					</Navbar>
+				</header>
+
+				<Container>
+					<Row>
+						<Col md={12}>
+							<div className="wrapper">
+								<Switch>
+									<Route exact path="/" component={CreateStudent} />
+									<Route path="/create-student" component={CreateStudent} />
+									<Route path="/edit-student/:id" component={EditStudent} />
+									<Route path="/student-list" component={StudentList} />
+								</Switch>
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+		</Router>
 	);
-}
+};
 
 export default App;

@@ -1,5 +1,11 @@
+import Loginform from "../components/Loginform";
+
 const Login = () => {
-	return <h1>hello world</h1>;
+	return (
+		<>
+			<Loginform />
+		</>
+	);
 };
 
 export default Login;
